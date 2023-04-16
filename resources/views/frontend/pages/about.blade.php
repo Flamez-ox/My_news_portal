@@ -1,5 +1,8 @@
 @extends('frontend.frontend_master')
 
+@section('Tittle', 'About')
+
+
 @section('body')
 <br>
 <br>

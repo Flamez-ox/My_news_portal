@@ -33,9 +33,9 @@
                         
                         
                     </li>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="{{ route('home') }}">Home</a></li>
                     <li>
-                        <a href="#">About<span class=""></span></a>
+                        <a href="{{ route('about') }}">About<span class=""></span></a>
                                 <!-- /.nav-third-level -->
                             </li>
                             <li>
@@ -103,14 +103,22 @@
                     </div>
                 </div>
                 <!--breaking news-->
-                <div class="col-sm-8 col-md-7">
+                @if ($settings->news_ticker_status == 'Show')
+                    <div class="col-sm-8 col-md-7">
                     <div class="newsticker-inner">
+                        @php $i = 0; @endphp
+                        
                         <ul class="newsticker">
-                            <li><span class="color-1">Fashion</span><a href="#">Etiam imperdiet volutpat libero eu tristique.imperdiet volutpat libero eu tristique.</a></li>
-                            <li><span class="color-2">International</span><a href="#">Curabitur porttitor ante eget hendrerit adipiscing.</a></li>
-                            <li><span class="color-3">Health</span><a href="#">Praesent ornare nisl lorem, ut condimentum lectus gravida ut.</a></li>
-                            <li><span class="color-4">technology</span><a href="#">Nunc ultrices tortor eu massa placerat posuere.</a></li>
-                            <li><span class="color-1">Travel</span><a href="#">Etiam imperdiet volutpat libero eu tristique.imperdiet volutpat libero eu tristique.</a></li>
+                            @foreach ($post as $item)
+                            @php $i++; @endphp
+                            @if ($i > $settings->news_ticker_total)
+
+                            @break;
+                                
+                            @endif
+                                <li><a href="{{ route('post_detail', $item->id) }}"><span class="color-1">{{ $item->rSubCategory->rCategory->category_name }}</span></a><a href="{{ route('post_detail', $item->id) }}">{{ $item->post_tittle }}</a></li>
+                            @endforeach
+                            
                         </ul>
                         <div class="next-prev-inner">
                             <a href="#" id="prev-button"><i class='pe-7s-angle-left'></i></a>
@@ -118,6 +126,8 @@
                         </div>
                     </div>
                 </div>
+                @endif
+                
             </div>
         </div>
     </div>
@@ -134,7 +144,16 @@
                 </div>
                 <div class="col-xs-8 col-md-8 col-sm-8 hidden-xs">
                     <div class="header-banner">
-                        <a href="#"><img class="td-retina img-responsive" src="{{ asset('frontend/images/top-bannner.jpg') }}" alt=""></a>
+                        @if ($global_top_ad->top_ad_status == 'Show')
+                        <div class="ads">
+                            @if ($global_top_ad->top_ad_url == '') 
+                            <img class="td-retina img-responsive" src="{{ asset('frontend/images/'.$global_top_ad->top_ad) }}" alt="">
+                            @else
+                            <a href="{{ $global_top_ad->top_ad_url }}"><img class="td-retina img-responsive" src="{{ asset('frontend/images/'.$global_top_ad->top_ad) }}" alt=""></a> 
+                            @endif
+                        </div>
+                        @endif
+                        
                     </div>
                 </div>
             </div>
@@ -145,9 +164,9 @@
         <nav class="navbar">
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
-                    <li class="active"><a href="home-style-one.html" class="category01">HOME</a></li>
+                    <li class="active"><a href="{{ route('home') }}" class="category01">HOME</a></li>
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle category03" data-toggle="dropdown">ABOUT <span class="pe-7s-angle-down"></span></a>
+                        <a href="{{ route('about') }}" class="dropdown-toggle category03" data-toggle="dropdown">ABOUT <span class="pe-7s-angle-down"></span></a>
         
                     </li>
                     <li><a href="category-style-two.html" class="category04">FASHION</a></li>

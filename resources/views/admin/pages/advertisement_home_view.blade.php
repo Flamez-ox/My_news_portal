@@ -2,104 +2,85 @@
 
 @section('body')
 
-<div class="main-sidebar">
-    <aside id="sidebar-wrapper">
-        <div class="sidebar-brand">
-            <a href="index.html">Admin Panel</a>
-        </div>
-        <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html"></a>
-        </div>
 
-        <ul class="sidebar-menu">
-
-            <li class="active"><a class="nav-link" href="index.html"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
-
-            <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Dropdown Items</span></a>
-                <ul class="dropdown-menu">
-                    <li class="active"><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 1</a></li>
-                    <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i> Item 2</a></li>
-                </ul>
-            </li>
-
-            <li class=""><a class="nav-link" href="setting.html"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
-
-            <li class=""><a class="nav-link" href="form.html"><i class="fas fa-hand-point-right"></i> <span>Form</span></a></li>
-
-            <li class=""><a class="nav-link" href="table.html"><i class="fas fa-hand-point-right"></i> <span>Table</span></a></li>
-
-            <li class=""><a class="nav-link" href="invoice.html"><i class="fas fa-hand-point-right"></i> <span>Invoice</span></a></li>
-
-        </ul>
-    </aside>
-</div>
 
 <div class="main-content">
     <section class="section">
-        <div class="section-header">
-            <h1>Form</h1>
-            <div class="ml-auto">
-                <a href="" class="btn btn-primary"><i class="fas fa-plus"></i> Button</a>
+            <div class="section-header">
+                <h1> Home Advertisment </h1>
+                {{-- <div class="ml-auto">
+                    <a href="" class="btn btn-primary"><i class="fas fa-plus"></i> Button</a>
+                </div> --}}
             </div>
-        </div>
         <div class="section-body">
-            <div class="row">
-                <div class="col-12">
-                    <div class="card">
-                        <div class="card-body">
-                            <form action="" method="post" enctype="multipart/form-data">
-
-                                <div class="form-group mb-3">
-                                    <label>Text</label>
-                                    <input type="text" class="form-control" name="" value="">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Datepicker</label>
-                                    <input type="text" class="form-control datepicker" name="" value="">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Datepicker</label>
-                                    <input type="text" class="form-control timepicker" name="" value="">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Color</label>
-                                    <input type="text" class="form-control jscolor" name="" value="A2A5FF">
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Textarea</label>
-                                    <textarea name="" class="form-control h_100" cols="30" rows="10"></textarea>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Textarea (Summernote)</label>
-                                    <textarea name="" class="form-control snote" cols="30" rows="10"></textarea>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Toggle Option *</label>
-                                    <div class="toggle-container">
-                                        <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" name="" value="Yes">
+            <form action="{{ route('home_advertisement_submit') }}" method="post" enctype="multipart/form-data">
+                @csrf
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Above Search</h5>
+                                    <div class="form-group mb-3">
+                                        <label>Existing Photo</label>
+                                        <div>
+                                            <img src="{{ asset('frontend/images/'.$home_advert->above_search_ad) }}" alt="Existing photo" width="100%">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Toggle Option *</label>
-                                    <div class="toggle-container">
-                                        <input type="checkbox" data-toggle="toggle" data-on="Yes" data-off="No" data-onstyle="success" data-offstyle="danger" name="" value="Yes" checked>
+                                    <div class="form-group mb-3">
+                                        <label>Change Photo</label>
+                                        <div>
+                                            <input type="file" name ="above_search_ad">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group mb-3">
-                                    <label>Photo</label>
-                                    <div>
-                                        <input type="file" name="">
+                                    <div class="form-group mb-3">
+                                        <label>URL</label>
+                                        <input type="text" class="form-control" name="above_search_ad_url" value="{{ $home_advert->above_search_ad_url }}">
                                     </div>
-                                </div>
-                                <div class="form-group">
-                                    <button type="submit" class="btn btn-primary">Submit</button>
-                                </div>
-                            </form>
+                                    <div class="form-group mb-3">
+                                        <label>Status</label>
+                                        <select class="form-control" name="above_search_ad_status">
+                                            <option  value="Show" @if($home_advert->above_search_ad_status == "Show") selected @endif >Show</option>
+                                            <option  value="Hide" @if($home_advert->above_search_ad_status == "Hide") selected @endif>Hide</option>
+                                        </select>
+                                    </div>
+                             </div>
+                        </div>
+                        </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5>Above Footer</h5>
+                                    <div class="form-group mb-3">
+                                        <label>Existing Photo</label>
+                                        <div>
+                                            <img src="{{ asset('frontend/images/'.$home_advert->above_footer_ad) }}" alt="Existing photo" width="100%">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Change Photo</label>
+                                        <div>
+                                            <input type="file" name ="above_footer_ad">
+                                        </div>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>URL</label>
+                                        <input type="text" class="form-control" name="above_footer_ad_url" value="{{ $home_advert->above_footer_ad_url }}">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label>Status</label>
+                                        <select class="form-control" name="above_footer_ad_status">
+                                            <option value="Show" @if($home_advert->above_footer_ad_status == "Show") selected @endif >Show</option>
+                                            <option value="Hide" @if($home_advert->above_footer_ad_status == "Hide") selected @endif>Hide</option>
+                                        </select>
+                                    </div>   
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </div>
+            </form>
         </div>
     </section>
 </div>

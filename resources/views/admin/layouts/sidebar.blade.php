@@ -9,20 +9,28 @@
 
         <ul class="sidebar-menu">
 
-            <li class="active"><a class="nav-link" href="index.html"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
+            <li class="{{ Request::is('admin/dashboard') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_dashboard') }}"><i class="fas fa-hand-point-right"></i> <span>Dashboard</span></a></li>
 
-            <li class="nav-item dropdown active">
-                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Advertisements</span></a>
+            <li class="nav-item dropdown {{ Request::is('admin/top-advertisement-*') || Request::is('admin/home-advertisement-*') || Request::is('admin/sidebar-advertisement-*') ? 'active' : ''}} ">
+                <a href="" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>Advertisements</span></a>
                 <ul class="dropdown-menu">
-                    <li class="active"><a class="nav-link" href=""><i class="fas fa-angle-right"></i>Top Advertisements</a></li>
-                    <li class=""><a class="nav-link" href="{{ route('admin_home_advertisement') }}"><i class="fas fa-angle-right"></i>Home Advertisements</a></li>
-                    <li class=""><a class="nav-link" href=""><i class="fas fa-angle-right"></i>Sidebar Advertisements</a></li>
+                    <li class="{{ Request::is('admin/top-advertisement-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_top_advertisement') }}"></i>Top Advertisements</a></li>
+                    <li class="{{ Request::is('admin/home-advertisement-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_home_advertisement') }}"></i>Home Advertisements</a></li>
+                    <li class="{{ Request::is('admin/sidebar-advertisement-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_sidebar_advertisement') }}"></i>Sidebar Advertisements</a></li>
                 </ul>
             </li>
+            
+            <li class="nav-item dropdown {{ Request::is('admin/category-*') || Request::is('admin/sub-category-*') || Request::is('admin/post-*')  ? 'active' : ''}}">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-hand-point-right"></i><span>News</span></a>
+                <ul class="dropdown-menu">
+                    <li class="{{ Request::is('admin/category-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_catergory_show') }}"></i>Catergories</a></li>
+                    <li class="{{ Request::is('admin/sub-category-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_sub_catergory_show') }}"></i>Sub-catergories</a></li>
+                    <li class="{{ Request::is('admin/post-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_post_show') }}"></i>Posts</a></li>
+                </ul>
+            </li>
+            <li class="{{ Request::is('admin/settings-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_setting') }}"><i class="fas fa-hand-point-right"></i> <span>Settings</span></a></li>
 
-            {{-- <li class=""><a class="nav-link" href="setting.html"><i class="fas fa-hand-point-right"></i> <span>Setting</span></a></li>
-
-            <li class=""><a class="nav-link" href="form.html"><i class="fas fa-hand-point-right"></i> <span>Form</span></a></li>
+             {{-- <liclass=""><aclass="nav-link"href="form.html"><iclass="fasfa-hand-point-right"></i><span>Form</span></a></li>
 
             <li class=""><a class="nav-link" href="table.html"><i class="fas fa-hand-point-right"></i> <span>Table</span></a></li>
 
