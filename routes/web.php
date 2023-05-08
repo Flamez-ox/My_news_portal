@@ -4,13 +4,19 @@ use App\Http\Controllers\Admin\AdminHomeController;
 use App\Http\Controllers\Admin\AdminLoginController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\Admin\AdminVideoController;
+use App\Http\Controllers\Admin\AdminContactController;
+use App\Http\Controllers\Admin\AdminPagesController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\HomeAdertisementController;
 use App\Http\Controllers\Admin\SettingController;
 use App\Http\Controllers\Admin\SidebarAdvertisementController;
 use App\Http\Controllers\Admin\SubcategoryController;
 use App\Http\Controllers\Admin\TopAdvertisementController;
+use App\Http\Controllers\Admin\PhotoGalleryController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\ContactController;
+use App\Http\Controllers\Frontend\PhotoController;
 use App\Http\Controllers\Frontend\PostController;
 use App\Http\Controllers\Frontend\SubCategoryController as FrontendSubCategoryController;
 use Illuminate\Support\Facades\Route;
@@ -33,9 +39,15 @@ use Illuminate\Support\Facades\Route;
 // Home
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [HomeController::class, 'about'])->name('about');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::post('/sendmail', [ContactController::class, 'sendmail'])->name('sendmail');
+Route::get('/login', [HomeController::class, 'login'])->name('login');
 Route::get('/News/{id}', [PostController::class, 'post_detail'])->name('post_detail');
 Route::get('/sub-category-news/{id}', [FrontendSubCategoryController::class, 'sub_category_news'])->name('sub_category_news');
 Route::get('/all-News', [FrontendSubCategoryController::class, 'all_post'])->name('all_posts');
+Route::get('/Photo-Gallery', [PhotoController::class, 'index'])->name('photo_gallery');
+Route::get('/Video-Gallery', [PhotoController::class, 'video'])->name('video_gallery');
+
 
 // Admin*
 
@@ -64,7 +76,7 @@ Route::get('/admin/sidebar-advertisement-create', [SidebarAdvertisementControlle
 Route::post('/admin/sidebar-advertisement-submit', [SidebarAdvertisementController::class, 'sidebar_advertisement_submit'])->name('sidebar_advertisement_submit')->middleware('admin:admin');
 Route::get('/admin/sidebar-advertisement-edit/{id}', [SidebarAdvertisementController::class, 'sidebar_ad_edit'])->name('admin_sidebar_advertisement_edit')->middleware('admin:admin');
 Route::post('/admin/sidebar-advertisement-update/{id}', [SidebarAdvertisementController::class, 'sidebar_advertisement_update'])->name('sidebar_advertisement_update')->middleware('admin:admin');
-Route::get('/admin/sidebar-advertisement-deleet/{id}', [SidebarAdvertisementController::class, 'sidebar_ad_delete'])->name('admin_sidebar_advertisement_delete')->middleware('admin:admin');
+Route::get('/admin/sidebar-advertisement-delete/{id}', [SidebarAdvertisementController::class, 'sidebar_ad_delete'])->name('admin_sidebar_advertisement_delete')->middleware('admin:admin');
 
 
 
@@ -95,3 +107,25 @@ Route::get('/admin/post-delete-tag/{id}/{id1}', [AdminPostController::class, 'po
 
 Route::get('/admin/settings-show', [SettingController::class, 'setting_show'])->name('admin_setting')->middleware('admin:admin');
 Route::post('/admin/setting-update', [SettingController::class, 'setting_update'])->name('setting_update')->middleware('admin:admin');
+
+Route::get('/admin/photo-show', [PhotoGalleryController::class, 'photo_show'])->name('admin_photo')->middleware('admin:admin');
+Route::get('/admin/photo-create', [PhotoGalleryController::class, 'photo_create'])->name('admin_photo_create')->middleware('admin:admin');
+Route::post('/admin/photo-submit', [PhotoGalleryController::class, 'photo_submit'])->name('photo_submit')->middleware('admin:admin');
+Route::get('/admin/photo-edit/{id}', [PhotoGalleryController::class, 'photo_edit'])->name('admin_photo_edit')->middleware('admin:admin');
+Route::post('/admin/photo-update/{id}', [PhotoGalleryController::class, 'photo_update'])->name('photo_update')->middleware('admin:admin');
+Route::get('/admin/photo-delete/{id}', [PhotoGalleryController::class, 'photo_delete'])->name('admin_photo_delete')->middleware('admin:admin');
+
+
+Route::get('/admin/video-show', [AdminVideoController::class, 'video_show'])->name('admin_video')->middleware('admin:admin');
+Route::get('/admin/video-create', [AdminVideoController::class, 'video_create'])->name('admin_video_create')->middleware('admin:admin');
+Route::post('/admin/video-submit', [AdminVideoController::class, 'video_submit'])->name('video_submit')->middleware('admin:admin');
+Route::get('/admin/video-edit/{id}', [AdminVideoController::class, 'video_edit'])->name('admin_video_edit')->middleware('admin:admin');
+Route::post('/admin/video-update/{id}', [AdminVideoController::class, 'video_update'])->name('video_update')->middleware('admin:admin');
+Route::get('/admin/video-delete/{id}', [AdminVideoController::class, 'video_delete'])->name('admin_video_delete')->middleware('admin:admin');
+
+Route::get('/admin/pages-status', [AdminPagesController::class, 'status_view'])->name('status_view')->middleware('admin:admin');
+Route::post('/admin/pages-status/{id}', [AdminPagesController::class, 'status_view_update'])->name('status_view_update')->middleware('admin:admin');
+
+
+Route::get('/admin/contact-show', [AdminContactController::class, 'contact_show'])->name('contact_show')->middleware('admin:admin');
+Route::post('/contact-show/update/{id}', [AdminContactController::class, 'contact_update'])->name('contact_update')->middleware('admin:admin');

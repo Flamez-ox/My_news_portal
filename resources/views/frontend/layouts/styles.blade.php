@@ -22,7 +22,8 @@
     <!-- animate -->
     <link rel="stylesheet" href="{{ asset('frontend/css/animate.min.css') }}">
     <!-- fonts css -->
-    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{{ asset('frontend/font-awesome/css/font-awesome.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/iziToast.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/Pe-icon-7-stroke.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('frontend/css/flaticon.css') }}" />
     <!-- custom css -->

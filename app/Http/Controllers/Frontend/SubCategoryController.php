@@ -26,7 +26,7 @@ class SubCategoryController extends Controller
         $settings = Settings::where('id',1)->first();
 
        $post = Post::with('rSubCategory.rCategory')->Orderby('id','desc')->get();
-       $post_data = Post::where('sub_category_id',$id)->Orderby('sub_category_id','desc')->paginate(1);
+       $post_data = Post::where('sub_category_id',$id)->Orderby('sub_category_id','desc')->paginate(2);
 
         return view('frontend.pages.sub_category_news',compact('settings','post','sub_category','post_data'));
     }

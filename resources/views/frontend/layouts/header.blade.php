@@ -87,24 +87,35 @@
     <div class="top_header hidden-xs">
         <div class="container">
             <div class="row">
-                
-                <div class="col-sm-4 col-md-3">
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                          Language
-                        </button>
-                        <div class="dropdown-menu">
-                            <ul>
-                                <li><a class="dropdown-item" href="#">English</a></li>
-                                <li><a class="dropdown-item" href="#">Igbo</a></li>
-                            </ul>
-                          
-                        </div>
+                <div class="top_header_menu_wrap"> 
+                    <ul class="top-header-menu">
+                        
+                    </ul>
+                    <div class="col-sm-4 col-md-3">
+                        @if ($global_page_status->registration_status == 'Show')
+                        <li><a href="">REGISTER</a></li>
+                        @endif
+                        @if ($global_page_status->login_status == 'Show') 
+                        <li><a href="{{ route('login') }}">LOGIN</a></li>
+                        @endif
+                    </div>
+                    
+                </div>
+                <div class="btn-group">
+                    <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Language
+                    </button>
+                    <div class="dropdown-menu">
+                        <ul>
+                            <li><a class="dropdown-item" href="#">English</a></li>
+                            <li><a class="dropdown-item" href="#">Igbo</a></li>
+                        </ul>
+                    
                     </div>
                 </div>
                 <!--breaking news-->
                 @if ($settings->news_ticker_status == 'Show')
-                    <div class="col-sm-8 col-md-7">
+                    <div class="col-sm-8 col-md-9">
                     <div class="newsticker-inner">
                         @php $i = 0; @endphp
                         
@@ -165,18 +176,48 @@
             <div class="collapse navbar-collapse">
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ route('home') }}" class="category01">HOME</a></li>
+
+                    @if ($global_page_status->about_status == 'Show')
+                        <li class=""><a href="{{ route('about') }}" class="category02" data-toggle="dropdown">ABOUT</a></li>
+                    @endif
+                    
+
+                    @if ($global_page_status->all_news_status == 'Show')
+                         <li><a href="{{ route('all_posts') }}" class="category03">All NEWS</a></li>
+                    @endif
+                   
+
+                    @foreach ($global_categories as $item)
+                    @if($loop->iteration > 4)
+                    @break
+                    @endif
                     <li class="dropdown">
-                        <a href="{{ route('about') }}" class="dropdown-toggle category03" data-toggle="dropdown">ABOUT <span class="pe-7s-angle-down"></span></a>
-        
+                        <a href="#" class="dropdown-toggle category04" data-toggle="dropdown">{{ $item->category_name }} <span class="pe-7s-angle-down"></span></a>
+                        <ul class="dropdown-menu menu-slide">
+                            @foreach ($item->rSubCategory as $item2)
+                            @if($loop->iteration > 2)
+                            @break
+                            @endif
+                                <li><a href="{{ route('sub_category_news',$item2->id)}}">{{ $item2->sub_category_name }}</a></li>
+                            @endforeach
+                                
+                            
+                        </ul>
                     </li>
-                    <li><a href="category-style-two.html" class="category04">FASHION</a></li>
-                    <li><a href="category-style-one.html" class="category05">TRAVEL</a></li>
-                    <li><a href="#" class="category06">FOOD</a></li>
-                    <li><a href="#" class="category07">TECHNOLOGY</a></li>
-                    <li><a href="#" class="category08">LIFESTYLE</a></li>
+                    @endforeach
+                    
                     <li class="dropdown">
-                        <a href="#" class="dropdown-toggle category09" data-toggle="dropdown">CONTACT <span class="pe-7s-angle-down"></span></a>
+                        <a href="#" class="dropdown-toggle category05" data-toggle="dropdown">GALLERIES <span class="pe-7s-angle-down"></span></a>
+                        <ul class="dropdown-menu menu-slide">
+                            <li><a href="{{ route('photo_gallery') }}">Photo Gallery</a></li>
+                            <li><a href="{{ route('video_gallery') }}">Video Gallery</a></li>
+                        </ul>
                     </li>
+
+                    @if ($global_contact->contact_status == 'Show')
+                        <li><a href="{{ route('contact') }}" >CONTACT</a></li>
+                    @endif
+                    
                 </ul>
             </div>
             <!-- navbar-collapse -->

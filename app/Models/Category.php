@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     use HasFactory;
+
+    public function rSubCategory()
+    {
+        return $this->hasMany(SubCategory::class)->where('show_on_menu','Show')->Orderby('sub_category_order','asc');
+    }
 }

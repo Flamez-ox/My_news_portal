@@ -21,5 +21,7 @@
     <script type="text/javascript" src="{{ asset('frontend/s/jquery-ui.js') }}j"></script>
     <!-- form -->
     <script type="text/javascript" src="{{ asset('frontend/js/form-classie.js') }}"></script>
+    <!-- iztoast-->
+    <script type="text/javascript" src="{{ asset('frontend/js/iziToast.min.js') }}"></script>
     <!-- custom js -->
     <script type="text/javascript" src="{{ asset('frontend/js/custom.js') }}"></script>

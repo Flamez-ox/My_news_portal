@@ -30,7 +30,7 @@
                                 <div class="post-wrapper wow fadeIn" data-wow-duration="2s">
                                     <div class="post-thumb img-zoom-in">
                                         <a href="{{ route('post_detail',$item->id) }}">
-                                            <img class="entry-thumb-4" src="{{ asset('frontend/images/'.$item->post_photo) }}" alt="">
+                                            <img class="entry-thumb" src="{{ asset('frontend/images/'.$item->post_photo) }}" alt="">
                                         </a>
                                     </div>
                                     <div class="post-info">
@@ -63,54 +63,60 @@
                     <div class="hidden-xs col-md-6 col-sm-6 col-padding-1">
                         <section class="articale-inner">
                             <div class="row">
+                                
                                 <div id="content-slide-5" class="owl-carousel">
                                     <!-- item-1 -->
+                                    
                                     <div class="item">
-                                        <div class="row rn_block">
-                                           
-                                            @foreach ($post as $item)
+                                        
+                                            <div class="row rn_block">
                                             
-                                            @if ($loop->iteration < 4)
-                                            
-                                             @continue;
-                                             
-                                            @endif
+                                                @foreach ($post as $item)
+                                                
+                                                @if ($loop->iteration < 4)
+                                                
+                                                @continue;
+                                                
+                                                @endif
 
 
-                                            @if ($loop->iteration == 8) 
-                                            
-                                             @break;
+                                                @if ($loop->iteration == 8) 
+                                                
+                                                @break;
 
-                                            @endif
-                                            <div class="col-md-6 col-sm-6 padd">
-                                                <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
-                                                    <!-- image -->
-                                                    <div class="post-thumb">
-                                                        <a href="{{ route('post_detail',$item->id) }}">
-                                                            <img class="img-responsive" src="{{ asset('frontend/images/'.$item->post_photo) }}" alt="">
-                                                        </a>
-                                                    </div>
-                                                    <div class="post-info meta-info-rn">
-                                                        <div class="slide">
-                                                            <a target="_blank" href="{{ route('post_detail',$item->id) }}" class="post-badge btn_five">{{ $item->rSubCategory->rCategory->category_name }}</a>
+                                                @endif
+                                                <div class="col-md-6 col-sm-6 padd">
+                                                    <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
+                                                        <!-- image -->
+                                                        <div class="post-thumb">
+                                                            <a href="{{ route('post_detail',$item->id) }}">
+                                                                <img class="img-responsive"  src="{{ asset('frontend/images/'.$item->post_photo) }}" alt="">
+                                                            </a>
+                                                        </div>
+                                                        <div class="post-info meta-info-rn">
+                                                            <div class="slide">
+                                                                <a target="_blank" href="{{ route('post_detail',$item->id) }}" class="post-badge btn_five">{{ $item->rSubCategory->rCategory->category_name }}</a>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
-                                                <div class="post-title-author-details">
-                                                    <h4><a href="{{ route('post_detail',$item->id) }}">{{ $item->post_tittle }}</a></h4>
-                                                </div>
-                                                <div class="post-editor-date">
-                                                    <div class="post-date">
-                                                        <i class="pe-7s-clock"></i> @php $time = strtotime($item->updated_at); $date = date('d F, Y',$time); @endphp
-                                                    {{ $date }}
+                                                    <div class="post-title-author-details">
+                                                        <h4><a href="{{ route('post_detail',$item->id) }}">{{ $item->post_tittle }}</a></h4>
                                                     </div>
-                                                    <div class="post-author-comment"><i class="pe-7s-comment"></i> {{ $item->visitors }} </div>
+                                                    <div class="post-editor-date">
+                                                        <div class="post-date">
+                                                            <i class="pe-7s-clock"></i> @php $time = strtotime($item->updated_at); $date = date('d F, Y',$time); @endphp
+                                                        {{ $date }}
+                                                        </div>
+                                                        <div class="post-author-comment"><i class="pe-7s-comment"></i> {{ $item->visitors }} </div>
+                                                    </div>
                                                 </div>
+                                                @endforeach
                                             </div>
-                                            @endforeach
-                                        </div>
+                                        
                                     </div>
+                                   
                                 </div>
+                                
                             </div>
                         </section>
                     </div>
@@ -122,11 +128,12 @@
             <div class="row">
                 <div class="col-md-8 col-sm-8">
                     <!-- left content inner -->
+                    @foreach ($sub_category as $item)
                     <section class="recent_news_inner">
                         
-                        @foreach ($sub_category as $item)
                         
-                        @if ($loop->iteration > 1)
+                        
+                        @if ($loop->iteration > 2)
                           @break;  
                         @endif
                         <h3 class="category-headding ">{{ $item->sub_category_name }}</h3>
@@ -176,9 +183,14 @@
                            
                         </div>
                         
-                        @endforeach
+                        
                     </section>
-                    
+                    @endforeach 
+
+
+
+
+
                     @if ($home_advert->above_search_ad_status == 'Show')
                     <div class="ads">
                         @if ($home_advert->above_search_ad_url == '') 

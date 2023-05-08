@@ -58,7 +58,7 @@ class AdminLoginController extends Controller
 
         $reset_link = url('admin/reset-password/'.$token.'/'.$request->email);
         $subject = 'Reset Password';
-        $message = '<a href='.$reset_link.'>Reset password</a>';
+        $message = ' <a href='.$reset_link.'>Reset password</a>';
         
 
 

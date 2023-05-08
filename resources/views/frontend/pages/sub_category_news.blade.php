@@ -9,15 +9,17 @@
     <div class="container">
         <br>
         <br>
-        <div><h1 class="category-headding ">{{ $sub_category->rCategory->category_name }}</h1></div>
+        <div><h1 >{{ $sub_category->rCategory->category_name }}</h1></div>
+        <div class="headding-border bg-color-2"></div>
         <br>
         <div class="row">
+            @if(count($post_data))
             @foreach ($post_data as $item)
                <div class="col-md-4 col-sm-4">
                 <!-- sports -->
                 <div class="sports-inner">
-                    <h4 class="category-headding ">{{ $item->rSubCategory->sub_category_name }}</h4>
-                    <div class="headding-border bg-color-1"></div>
+                    <h2 >{{ $item->rSubCategory->sub_category_name }}</h2>
+                    
                     <div class="post-wrapper wow fadeIn" data-wow-duration="1s">
                         <!-- post title -->
                         <h3><a href="#">{{ $item->post_tittle }}</a></h3>
@@ -32,7 +34,8 @@
                         <div class="post-editor-date">
                             <!-- post date -->
                             <div class="post-date">
-                                <i class="pe-7s-clock"></i> Oct 6, 2016
+                                <i class="pe-7s-clock"></i>@php $time = strtotime($item->updated_at); $date = date('d F, Y',$time); @endphp
+                                {{ $date }}
                             </div>
                             <!-- post comment -->
                             <div class="post-author-comment"><i class="pe-7s-comment"></i> {{ $item->visitors }} </div>
@@ -56,8 +59,10 @@
                 
             </div> 
             @endforeach
+            @else
             
-           
+                <span class="text-danger">No Post found</span>
+           @endif
         
     </div>
 </section>

@@ -30,6 +30,14 @@
             </li>
             <li class="{{ Request::is('admin/settings-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_setting') }}"><i class="fas fa-hand-point-right"></i> <span>Settings</span></a></li>
 
+            <li class="{{ Request::is('admin/photo-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_photo') }}"><i class="fas fa-hand-point-right"></i> <span>Photo Gallery</span></a></li>
+
+            <li class="{{ Request::is('admin/video-*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('admin_video') }}"><i class="fas fa-hand-point-right"></i> <span>Video Gallery</span></a></li>
+
+            <li class="{{ Request::is('admin/pages-status/*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('status_view') }}"><i class="fas fa-hand-point-right"></i> <span>Pages Status</span></a></li>
+
+            <li class="{{ Request::is('admin/contact-show/*') ? 'active' : ''}}"><a class="nav-link" href="{{ route('contact_show') }}"><i class="fas fa-hand-point-right"></i> <span>Contact</span></a></li>
+
              {{-- <liclass=""><aclass="nav-link"href="form.html"><iclass="fasfa-hand-point-right"></i><span>Form</span></a></li>
 
             <li class=""><a class="nav-link" href="table.html"><i class="fas fa-hand-point-right"></i> <span>Table</span></a></li>

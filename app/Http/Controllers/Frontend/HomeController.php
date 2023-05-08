@@ -14,6 +14,7 @@ class HomeController extends Controller
     //
     public function index()
     {
+        
         $sub_category = SubCategory::with('rPost')->where('show_on_home','Show')->Orderby('sub_category_order','asc')->get();
         $home_advert = HomeAdvertisment::where('id',1)->first();
 
@@ -30,5 +31,19 @@ class HomeController extends Controller
         $settings = Settings::where('id',1)->first();
         $post = Post::with('rSubCategory.rCategory')->Orderby('id','desc')->get();
         return view('frontend.pages.about', compact('settings','post'));
+    }
+
+    public function contact()
+    {
+        $settings = Settings::where('id',1)->first();
+        $post = Post::with('rSubCategory.rCategory')->Orderby('id','desc')->get();
+        return view('frontend.pages.contact', compact('settings','post'));
+    }
+
+    public function login()
+    {
+        $settings = Settings::where('id',1)->first();
+        $post = Post::with('rSubCategory.rCategory')->Orderby('id','desc')->get();
+        return view('frontend.pages.login', compact('settings','post'));
     }
 }
